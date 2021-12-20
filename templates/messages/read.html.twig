@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie
+{% endblock %}
+
+{% block body %}
+
+<style>
+.containt{
+	display:flex;
+	justify-content:space-around
+}
+ p{
+	margin:20px
+}
+</style>
+
+<div class="containt">
+
+<div class="messagerie">
+
+  <p> <a class="btn btn-primary" href="{{ path("messages") }}">Accueil</a></p>
+  <p> <a class="btn btn-primary" href="{{ path("received") }}">Boîte de réception</a></p>
+  <p><a  class="btn btn-primary" href="{{path("messages")}}">Envoyés un message</a></p>
+
+</div>
+
+<div class="messagerie">
+
+	<h1>Messagerie</h1>
+                <h2>{{ message.title }}</h2>
+                <p>Message de {{ message.sender.email }}</p>
+                <p>Le {{ message.createdAt|date }}</p>
+                <div>{{ message.message }}</div>
+				   <a href="{{path("received")}}" class="btn btn-primary">Retour à la boite de réception</a>
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+{% endblock %}

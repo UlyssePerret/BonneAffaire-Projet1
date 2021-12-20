@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces index{% endblock %}
+   {% block stylesheets %}
+        <link rel="stylesheet" href="/css/annonces.css">
+  {% endblock %}
+     
+ 
+{% block body %}
+<style>
+.filtre{
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+</style>
+
+  
+ <h2 class="text-center text-4xl">Trouvez la bonne affaire parmi les millions de petites annonces</h2>
+{{ form_start(form) }}
+   <div class="row filtre mt-10">
+<div class="col-md-4">
+<h2>Recherche par categorie</h2>
+{{form_row(form.categorie)}}</div>
+<div class="col-md-4">
+<h2>Recherche par mots-clés</h2>
+{{form_row(form.mots)}}</div>
+ 
+ <div class="col-md-4">
+ <h2>Cliquer ici👇</h2>
+ <button class="btn btn-primary">{{ button_label|default('Valider') }}</button></div>
+
+
+   </div>
+   
+   {{form_widget(form)}}
+  
+{{ form_end(form) }}
+{% for annonce in annonces %}
+   <div class="container mt-5 mb-5 content-center ">
+    <div class="d-flex justify-content-center row ">
+        <div class="col-md-10">
+            <div class="row p-2 bg-white border rounded">
+                <div class="col-md-3 mt-1">
+                 {% for image in annonce.images %}
+    	        	<img src="{{ asset('uploads/' ~ image.name )}}" width="100%" alt="{{ annonce.title }}"/>
+                 {% endfor %}
+                
+                </div>
+                <div class="col-md-6 mt-1">
+                    <h5>{{annonce.title}}</h5>
+                    <div class="d-flex flex-row">
+                        <div class="ratings mr-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div><span>310</span>
+                    </div>
+                      <div class="mt-1 mb-1 spec-1"><span>Categorie: {{annonce.categories}}</span></div>
+                      <div class="mt-1 mb-1 spec-1"><span>Marque: {{annonce.marque}}</span></div>
+                    <div class="mt-1 mb-1 spec-1"><span>Publié le {{annonce.createdAt|date('Y-m-d H:i:s')}}</span></div>
+                      <div class="mt-1 mb-1 spec-1"><span>Information sur le produit ou le service👇</span></div>
+                    <p class="text-justify text-truncate para mb-0">{{annonce.content|slice(0, 800)|raw}}<br><br></p>
+                </div>
+                <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                    <div class="d-flex flex-row align-items-center">
+                        <h4 class="mr-1">GNF{{annonce.price}}</h4>
+                    </div>
+                    <h6 class="text-success">Une bone Affaire</h6>
+                    <div class="d-flex flex-column mt-4"><a class=" card-text btn btn-success" href="{{ path('annonces_show', {'id': annonce.id}) }}">Details</a><br><button class="btn btn-primary btn-sm mt-5" type="button"><a href="{{path('send')}}">contacter le vendeur</a></button></div>
+                </div>
+            </div>
+            
+            
+          </div>
+            
+           </div>
+      </div>
+
+
+
+             
+{% endfor %}
+     
+
+
+
+
+
+
+ <div class="container btn btn-info"> 
+                   
+   {{ knp_pagination_render(annonces) }}
+ </div>  
+ 
+    
+{% endblock %}

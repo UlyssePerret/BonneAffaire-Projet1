@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+    <h1>Annonces</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ annonce.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ annonce.slug }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ annonce.content|raw }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ annonce.marque }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ annonce.price }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ annonce.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ annonce.phone }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ annonce.ville }}</td>
+            </tr>
+            <tr>
+                <th>Cp</th>
+                <td>{{ annonce.cp }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ annonce.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Quartier</th>
+                <td>{{ annonce.quartier }}</td>
+            </tr>
+            <tr>
+                <th>Boite_postal</th>
+                <td>{{ annonce.boitePostal }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{{ annonce.active ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('controles_index') }}">back to list</a>
+
+    <a href="{{ path('controles_edit', {'id': annonce.id}) }}">edit</a>
+
+    {{ include('controles/_delete_form.html.twig') }}
+{% endblock %}

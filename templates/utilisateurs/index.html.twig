@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces index{% endblock %}
+
+{% block body %}
+    <h1>Annonces index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th>Content</th>
+                <th>Created_at</th>
+                <th>Marque</th>
+                <th>Price</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Ville</th>
+                <th>Cp</th>
+                <th>Adresse</th>
+                <th>Quartier</th>
+                <th>Boite_postal</th>
+                <th>Active</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for annonce in annonces %}
+            <tr>
+                <td>{{ annonce.id }}</td>
+                <td>{{ annonce.title }}</td>
+                <td>{{ annonce.slug }}</td>
+                <td>{{ annonce.content }}</td>
+                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.marque }}</td>
+                <td>{{ annonce.price }}</td>
+                <td>{{ annonce.email }}</td>
+                <td>{{ annonce.phone }}</td>
+                <td>{{ annonce.ville }}</td>
+                <td>{{ annonce.cp }}</td>
+                <td>{{ annonce.adresse }}</td>
+                <td>{{ annonce.quartier }}</td>
+                <td>{{ annonce.boitePostal }}</td>
+                <td>{{ annonce.active ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('utilisateurs_show', {'id': annonce.id}) }}">show</a>
+                    <a href="{{ path('utilisateurs_edit', {'id': annonce.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('utilisateurs_new') }}">Create new</a>
+{% endblock %}

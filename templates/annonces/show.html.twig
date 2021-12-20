@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+ {% block stylesheets %}
+        <link rel="stylesheet" href="/css/annonces.css">
+  {% endblock %}
+     
+{% block body %}
+<style>
+.card{
+  margin: 30px;
+}
+</style>
+<div class="card text-center">
+<div class="card-header content-center">
+     {% for image in annonce.images %}
+    		<img src="{{ asset('uploads/' ~ image.name  )}}" width="100%" alt="{{ annonce.title }}"/>
+     {% endfor %}
+  </div>
+ 
+ <div class="card-header">
+    <h5 class="card-title text-5xl"> {{annonce.title}}</h5>
+  
+    
+  
+  </div>
+  <div class="card-body">
+   <h5 class="card-title">Catégorie: {{annonce.categories}}</h5>
+    <h5 class="card-title">Marque: {{annonce.marque}}</h5>
+    <h5 class="card-title"> Crée le {{annonce.createdAt|date('Y-m-d H:i:s')}}</h5>
+    <p class="card-text font-bold ">{{annonce.content|raw}}</p>
+     <p class="card-title text-3xl">Adresse: {{annonce.adresse}}</p>
+    <h5 class="card-title text-3xl">Ville: {{annonce.ville}}</h5>
+     <h5 class="card-title text-3xl">Quartier: {{annonce.quartier}}</h5>
+    <h5 class="card-title text-3xl">Code postal: {{annonce.cp}}</h5>
+     <h5 class="card-title text-3xl">Boite Postal: {{annonce.boitePostal}}</h5>
+    <h5 class="card-title text-3xl">Email: {{annonce.email}}</h5>
+     <h5 class="card-title text-3xl">Contact: {{annonce.phone}}</h5>
+     <h5 class="card-title"><a href="{{path('send')}}">contacter le vendeur</a>
+  
+  </div>
+  <div class="card-footer text-muted">
+  
+  </div>
+</div>
+
+{% for comment in annonce.comments %}
+
+<div class="card text-center">
+  <div class="card-header">
+    Avis de {{comment.author}}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Publier  le {{comment.createdAt|date("d/m/Y H:i") }}</h5>
+    <p class="card-text">{{comment.content|raw}}</p>
+    
+  </div>
+  <div class="card-footer text-muted">
+    Votre Avis compte👇
+  </div>
+</div>
+          
+
+
+          
+{% endfor %}
+
+    <div class="container mt-5">    
+                   
+<h2>Vous aussi donner votre avis!</h2>
+{{ form_start(form) }}
+
+{{form_end(form)}}
+
+
+
+</div>
+ <a class="btn btn-primary mt-5" href="{{ path('annonces_index') }}">Retour aux annonces</a>
+
+
+{% endblock %}
+
+   
+	

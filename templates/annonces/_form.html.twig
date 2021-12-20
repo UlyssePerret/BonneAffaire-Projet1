@@ -1,0 +1,37 @@
+
+{% block body %}
+{{ form_start(form) }}
+   <div class="row">
+<div class="col-md-4">{{form_row(form.title)}}</div>
+<div class="col-md-4">{{form_row(form.slug)}}</div>
+<div class="col-md-4">{{form_row(form.price)}}</div>
+<div class="col-md-4">{{form_row(form.marque)}}</div>
+<div class="col-md-4">{{form_row(form.email)}}</div>
+<div class="col-md-4">{{form_row(form.phone)}}</div>
+
+
+
+   </div>
+    <div class="row">
+<div class="col-md-4">{{form_row(form.cp)}}</div>
+<div class="col-md-4">{{form_row(form.ville)}}</div>
+<div class="col-md-4">{{form_row(form.adresse)}}</div>
+<div class="col-md-4">{{form_row(form.quartier)}}</div>
+<div class="col-md-4">{{form_row(form.boite_postal)}}</div>
+<div class="col-md-4">{{form_row(form.categories)}}</div>
+
+   </div>
+     {# Vérifier si la route est "annonces_edit" on affiche les images #}
+    {% if app.request.attributes.get('_route') == 'annonces_edit' %}
+        <h2>Images</h2>
+        {% for image in annonce.images %}
+            <div>
+                <img src="{{ asset('/uploads/' ~ image.name) }}" alt="Image" width="150">
+                <a href="{{ path('annonces_delete_image', {id: image.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ image.id) }}">Supprimer</a>
+            </div>
+        {% endfor %}
+    {% endif %}
+   {{form_widget(form)}}
+    <button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+{{ form_end(form) }}
+{% endblock %}
